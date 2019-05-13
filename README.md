@@ -6,13 +6,13 @@
 
           MVP
           
-  - Takes Twitch API and displays livestreams of Blizzards Competative Overwatch League.
-  
-              Nice To Have
+  - Displays a Twitch Streamer that is searched up, and able to search through League of legends ELO API for the streamer
+             
+             
+             Nice To Have
               
-  - Takes Overwatch League API and Displays stats of Teams playing
-  - Countdown Till next Match
-  - Display Teams and Link to their Website
-  - Twitch/Blizzard Passport Login
-  - Favorite Teams to Track
+  - Automatically refreshes every 30 mins
+  - Display What team that they play for if applicable
+  - Twitch/League of legends passport login
+  - Able to have multiple streams up at once
   
