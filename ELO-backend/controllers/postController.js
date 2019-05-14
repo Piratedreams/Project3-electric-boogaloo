@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const Post = require('../models/Post');
 
 router.get('/', async (req,res,next) => {
     console.log(req.body);
     try {
 
-        const summonerProfile = await User.find();
+        const summonerProfile = await Post.find();
 
         res.json({
             status: 200,
@@ -19,11 +19,11 @@ router.get('/', async (req,res,next) => {
 
 router.post('/', async (req, res) => {
     try{
-        const createdUser = await User.create(req.body);
+        const createdPost = await Post.create(req.body);
         console.log('youre seeing this because there is a response in creating')
         res.json({
             status:200,
-            data: createdUser
+            data: createdPost
         });
     } catch (err) {
         res.send(err)
@@ -32,10 +32,10 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const foundUser = await User.findById(req.params.id);
+        const foundPost = await Post.findById(req.params.id);
         res.json({
             status: 200,
-            data: foundUser
+            data: foundPost
         });
     } catch (err) {
         res.send(err)
@@ -44,10 +44,10 @@ router.get('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.json({
             status: 200,
-            data: updatedUser
+            data: updatedPost
         });
 
     }  catch (err) {
@@ -57,10 +57,10 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try{
-        const deletedUser = await User.findByIdAndRemove(req.params.id);
+        const deletedPost = await Post.findByIdAndRemove(req.params.id);
         res.json({
             status: 200,
-            data: deletedUser
+            data: deletedPost
         });
     } catch (err) {
         res.send(err)

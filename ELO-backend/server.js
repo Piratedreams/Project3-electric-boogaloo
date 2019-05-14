@@ -2,14 +2,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const session = require('express-session')
+const mongoose = require('mongoose');
 
 require('./db/db');
 
-
-app.use(session({
-   
-}));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,11 +20,11 @@ app.use(cors());
 
 
 
-const owlController = require('./controllers/owlController');
-const authController = require('./controllers/authController');
+const postController = require('./controllers/postController');
 
-app.use('/api/v1/movies', owlController);
-app.use('/auth', authController);
+
+app.use('/api/v1/post', postController);
+
 
 app.listen(process.env.PORT || 9000, () => {
     console.log('listening on port 9000');

@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 
 
 const userSchema = new mongoose.Schema({
-    summonerName: String,
-    rank: String,
-    age: Number,
-    bio: String
+    username: String,
+    body: String,
+    date: Date
 });
 
 
