@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class SummonerSearchForm extends Component {
     constructor() {
         super();
@@ -14,7 +15,7 @@ class SummonerSearchForm extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.findSummoner(this.state);
+        this.props.getSummoner(this.state);
     }
     render(){
         return (

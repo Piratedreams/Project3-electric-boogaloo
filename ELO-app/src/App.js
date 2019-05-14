@@ -9,8 +9,9 @@ import EloContainer from './EloContainer/EloContainer';
 function App() {
   return (
     <div className="App">
+      <EloContainer />
     <ReactPlayer url='twitch.tv/riotgames' />
-    <EloContainer/>
+    
     </div>
   );
 }
