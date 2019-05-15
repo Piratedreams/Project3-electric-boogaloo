@@ -20,7 +20,7 @@ class SummonerSearchForm extends Component {
     render(){
         return (
             <form onSubmit={this.handleSubmit}>
-            Search for a summoner <input onChange={this.handleChange} type='text' name='search' />
+            Search for a summoner <input onChange={this.handleChange} type='text' name='search' placeholder='summoner name'/>
             <input type='submit' />
             </form>
         )

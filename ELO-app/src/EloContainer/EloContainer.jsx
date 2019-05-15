@@ -13,9 +13,21 @@ class EloContainer extends Component {
     componentDidMount(){
         this.getSummoner({ search: ''})
     }
-    getSummoner = async (formData) => {
-        console.log(formData);
-        const searchURL = await `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${formData.search}api_key=RGAPI-3a1e1d3b-f252-4d97-94b0-1a802ab0aa83`
+    callSummoner = async (formData) => {
+        console.log(formData)
+        const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${formData.search}?api_key=RGAPI-bb50fd46-64ff-4da5-a090-51430bb0d889`
+        await fetch (searchURL)
+        .then((response) => response.accountID)
+        .then((data) => {
+            console.log(data);
+            this.setState({
+                summonerID: data.accountID
+            });
+        });
+    }
+    getSummoner = async (summonerID) => {
+        console.log(summonerID);
+        const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerID}?api_key=RGAPI-bb50fd46-64ff-4da5-a090-51430bb0d889`
         await fetch (searchURL)
         .then((response) => response.json())
         .then((data) => {
@@ -26,15 +38,16 @@ class EloContainer extends Component {
                 wins: data.wins,
                 losses: data.losses,
                 elo: data.leaguePoints
-            })
-        })
+            });
+        });
     }
+
 
     render() {
         console.log(this.state, '<- object')
         return (
         <div>
-            <SummonerSearchForm getSummoner={this.getSummoner}></SummonerSearchForm>
+                <SummonerSearchForm getSummoner={this.getSummoner} name="Access-Control-Allow-Origin"></SummonerSearchForm>
                 <h1>looking at {this.state.summoner}</h1>
                 <p>
                 rank: {this.state.rank}<br/>

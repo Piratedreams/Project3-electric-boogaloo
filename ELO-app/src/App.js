@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-// import StreamContainer from './StreamContainer/StreamContainer';
 import ReactPlayer from 'react-player'
 import EloContainer from './EloContainer/EloContainer';
-// import Twitch from 'react-twitch-embed-video'
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+
 
 
 function App() {

@@ -15,7 +15,7 @@ class UserContainer extends Component {
     }
     getUser = async () => {
         try {
-            const response = await fetch('https://localhost:9000/api/v1/User', {
+            const response = await fetch('https://localhost:9000/api/v1/auth', {
                 credentials: 'include'
             });
             if(response.status !== 200){
@@ -31,7 +31,7 @@ class UserContainer extends Component {
         e.preventDefault();
         console.log(User);
         try{
-            const createdMovie = await fetch('localhost:9000/api/v1/User', {
+            const createdMovie = await fetch('localhost:9000/api/v1/auth', {
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(User)
@@ -39,7 +39,20 @@ class UserContainer extends Component {
         } catch (err){
         console.log(err)
     }
-    
+    closeAndEdit = async (e) => {
+        e.preventDefault();
+        try{
+            const editResponse = await fetch('http://localhost:900/api/v1/auth', {
+                method: 'PUT',
+                bio: JSON.stringify(this.state.userToEdit),
+                'Content-Type': 'application'
+            })
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     }
 
 
