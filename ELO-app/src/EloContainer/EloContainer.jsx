@@ -14,7 +14,7 @@ class EloContainer extends Component {
         this.getSummoner({ search: ''})
     }
     callSummoner = async (formData) => {
-        console.log(formData)
+        console.log(data)
         const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${formData.search}?api_key=RGAPI-bb50fd46-64ff-4da5-a090-51430bb0d889`
         await fetch (searchURL)
         .then((response) => response.accountID)

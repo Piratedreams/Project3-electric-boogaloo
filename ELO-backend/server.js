@@ -9,13 +9,13 @@ require('./db/db');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(cors());
 const corsOptions = {
-    origin: 'http://localhost:3000', 
+    origin: 'https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/', 
     credentials: true, 
 }
 
-app.use(cors());
+
 
 
 
