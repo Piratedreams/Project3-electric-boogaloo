@@ -11,7 +11,7 @@ class EloContainer extends Component {
         }
     }
     componentDidMount(){
-        this.callSummoner({ search: ''})
+       
     }
     callSummoner = async (formData) => {
         console.log(formData)
@@ -34,10 +34,12 @@ class EloContainer extends Component {
         .then((data) => {
             console.log(data);
             this.setState({
-                summoner: data.summonerName,
-                rank: data.rank,
-                wins: data.wins,
-                losses: data.losses
+                summoner: data[0].summonerName,
+                tier: data[0].tier,
+                rank: data[0].rank,
+                wins: data[0].wins,
+                losses: data[0].losses,
+                points: data[0].leaguePoints
             });
         });
     }
@@ -53,7 +55,7 @@ class EloContainer extends Component {
                 rank: {this.state.tier} {this.state.rank}<br/>
                 wins: {this.state.wins}<br/>
                 losses: {this.state.losses}<br/>
-                elo: {this.state.leaguePoints}
+                progress through rank: {this.state.points} (qualify for promotional series at 100)
                 </p>
             
         </div>
