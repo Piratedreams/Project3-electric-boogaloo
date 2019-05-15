@@ -11,19 +11,20 @@ class EloContainer extends Component {
         }
     }
     componentDidMount(){
-        this.getSummoner({ search: ''})
+        this.callSummoner({ search: ''})
     }
     callSummoner = async (formData) => {
-        console.log(data)
+        console.log(formData)
         const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${formData.search}?api_key=RGAPI-bb50fd46-64ff-4da5-a090-51430bb0d889`
         await fetch (searchURL)
-        .then((response) => response.accountID)
+        .then((response) => response.json())
         .then((data) => {
             console.log(data);
             this.setState({
-                summonerID: data.accountID
+                summonerID: data.id
             });
         });
+        this.getSummoner(this.state.summonerID);
     }
     getSummoner = async (summonerID) => {
         console.log(summonerID);
@@ -36,8 +37,7 @@ class EloContainer extends Component {
                 summoner: data.summonerName,
                 rank: data.rank,
                 wins: data.wins,
-                losses: data.losses,
-                elo: data.leaguePoints
+                losses: data.losses
             });
         });
     }
@@ -47,10 +47,10 @@ class EloContainer extends Component {
         console.log(this.state, '<- object')
         return (
         <div>
-                <SummonerSearchForm getSummoner={this.getSummoner} name="Access-Control-Allow-Origin"></SummonerSearchForm>
+                <SummonerSearchForm callSummoner={this.callSummoner} name="Access-Control-Allow-Origin"></SummonerSearchForm>
                 <h1>looking at {this.state.summoner}</h1>
                 <p>
-                rank: {this.state.rank}<br/>
+                rank: {this.state.tier} {this.state.rank}<br/>
                 wins: {this.state.wins}<br/>
                 losses: {this.state.losses}<br/>
                 elo: {this.state.leaguePoints}

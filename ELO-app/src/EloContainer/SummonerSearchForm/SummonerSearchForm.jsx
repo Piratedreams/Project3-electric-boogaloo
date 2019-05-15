@@ -15,7 +15,7 @@ class SummonerSearchForm extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.getSummoner(this.state);
+        this.props.callSummoner(this.state);
     }
     render(){
         return (
