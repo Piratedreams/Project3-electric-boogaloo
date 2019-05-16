@@ -3,15 +3,13 @@ const router = express.Router();
 const Post = require('../models/Post');
 
 
-router.get('/', async (req,res,next) => {
+router.get('/', async (req, res, next) => {
     console.log(req.body);
     try {
-
-        const summonerProfile = await Post.find();
-
+        const posts = await Post.find();
         res.json({
             status: 200,
-            data: summonerProfile
+            data: posts
         });
     } catch (err)  {
         res.send(err)
