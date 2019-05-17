@@ -37,14 +37,13 @@ class PostContainer extends Component {
             }
     }
     
-    addPost = async (Posts, e) => {
+    addPost = async (Post, e) => {
         e.preventDefault();
         console.log(Posts);
         try{
-            const createdPost = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts', {
+            const createdPost = await fetch('http://localhost:9000/api/v1/Posts', {
                 method: 'POST',
-                credentials: 'include',
-                body: JSON.stringify(Posts)
+                Posts : JSON.stringify(Post)
             });
         } catch (err){
         console.log(err)
@@ -53,9 +52,8 @@ class PostContainer extends Component {
     closeAndEdit = async (e) => {
         e.preventDefault();
         try{
-            const editResponse = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts', {
+            const editResponse = await fetch('http://localhost:9000/api/v1/Posts', {
                 method: 'PUT',
-                credentials: 'include',
                 bio: JSON.stringify(this.state.postToEdit),
                 'Content-Type': 'application'
             })
@@ -83,9 +81,8 @@ class PostContainer extends Component {
         console.log(id, '<-- ID')
         e.preventDefault();
         try{
-            const deletePost = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts' + id, {
-                method: 'DELETE',
-                credentials: 'include'
+            const deletePost = await fetch('http://localhost:9000/api/v1/Posts' + id, {
+                method: 'DELETE'
             });
             console.log('inside try')
             const deletePostJson = await deletePost.json();
