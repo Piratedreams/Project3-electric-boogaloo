@@ -13,7 +13,7 @@ const EditPost = (props) => {
                 Edit Body:
                 <input type='text' name='body' onChange={props.handleFormChange} value={props.postToEdit.body}/>
             </label>
-            <input type='submit'/>
+            <input type='Submit'/>
             </form>
         </div>
     )

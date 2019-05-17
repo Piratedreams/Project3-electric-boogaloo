@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 const Posts = (props) => {
+    console.log(props);
     const postList = props.posts.map((Posts) => {
         return (
             <ul>

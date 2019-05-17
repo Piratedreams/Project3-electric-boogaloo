@@ -15,20 +15,21 @@ class EloContainer extends Component {
     }
     callSummoner = async (formData) => {
         console.log(formData)
-        const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${formData.search}?api_key=RGAPI-bb50fd46-64ff-4da5-a090-51430bb0d889`
+        const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${formData.search}?api_key=RGAPI-8e62ff29-d636-45c8-80a5-ab4149b7e68a`
         await fetch (searchURL)
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            this.getSummoner(data.id);
             this.setState({
                 summonerID: data.id
             });
         });
-        this.getSummoner(this.state.summonerID);
+        
     }
     getSummoner = async (summonerID) => {
         console.log(summonerID);
-        const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerID}?api_key=RGAPI-bb50fd46-64ff-4da5-a090-51430bb0d889`
+        const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerID}?api_key=RGAPI-8e62ff29-d636-45c8-80a5-ab4149b7e68a`
         await fetch (searchURL)
         .then((response) => response.json())
         .then((data) => {

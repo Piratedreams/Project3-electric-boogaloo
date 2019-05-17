@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CreatePost from '../CreatePost/CreatePost';
 import Posts from '../PostList/PostList';
-import EditPost from '../EditPost/EditPost'
+import EditPost from '../EditPost/EditPost';
 
 class PostContainer extends Component {
     constructor(){
@@ -24,14 +24,17 @@ class PostContainer extends Component {
     }
     getPost = async () => {
         try {
-            const response = await fetch('http://localhost:9000/api/v1/Posts/', {
-                
-            });
-            if(response.status !== 200){
-                throw Error(response.statusText);
-            }
-            const postParsed = await response.json();
-            this.setState({Posts: postParsed.data});
+            const searchURL = await 'http://localhost:9000/api/v1/Posts/'
+            await fetch(searchURL)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                this.setState({
+                    title: data.postToEdit.title,
+                    body: data.postToEdit.body,
+                    date: data.postToEdit.date
+                })
+            })
             } catch (err) {
             console.log(err)
             }
@@ -55,7 +58,7 @@ class PostContainer extends Component {
     closeAndEdit = async (e) => {
         e.preventDefault();
         try{
-            const editResponse = await fetch('http://localhost:9000/api/v1/Posts/', {
+            const editResponse = await fetch(`http://localhost:9000/api/v1/Posts/${this.state.postToEdit._id}`, {
                 method: 'PUT',
                 bio: JSON.stringify(this.state.postToEdit),
                 'Content-Type': 'application'
@@ -112,7 +115,7 @@ class PostContainer extends Component {
             <div>
                 <CreatePost addPost={this.addPost}/>
                 <Posts posts={this.state.Posts} showModal={this.showModal} deletePost={this.deletePost}/>
-                {this.state.modalShowing ? <EditPost postToEdit={this.state.PostToEdit} closeAndEdit={this.closeAndEdit} handleFormChange={this.handleFormChange}/> : null}
+                {this.state.modalShowing ? <EditPost postToEdit={this.state.postToEdit} closeAndEdit={this.closeAndEdit} handleFormChange={this.handleFormChange}/> : null}
             </div>
         )
     }
