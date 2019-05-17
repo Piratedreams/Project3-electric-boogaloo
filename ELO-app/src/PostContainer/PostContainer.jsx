@@ -25,13 +25,13 @@ class PostContainer extends Component {
     getPost = async () => {
         try {
             const response = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts', {
-                credentials: 'include'
+                
             });
             if(response.status !== 200){
                 throw Error(response.statusText);
             }
-            const PostParsed = await response.json();
-            this.setState({Posts: PostParsed.data});
+            const postParsed = await response.json();
+            this.setState({Posts: postParsed.data});
             } catch (err) {
             console.log(err)
             }
@@ -45,6 +45,9 @@ class PostContainer extends Component {
                 method: 'POST',
                 Posts : JSON.stringify(Post)
             });
+            const parsedResponse = await createdPost.json();
+            console.log(parsedResponse)
+            this.setState({Posts: [...this.state.Posts, parsedResponse.data]})
         } catch (err){
         console.log(err)
         }
@@ -57,6 +60,17 @@ class PostContainer extends Component {
                 bio: JSON.stringify(this.state.postToEdit),
                 'Content-Type': 'application'
             })
+            const parsedResponse = await editResponse.json();
+            const editPostArray = this.state.Posts.map((Posts) => {
+                if(Posts._id === this.state.postToEdit._id) {
+                    Posts = parsedResponse.data;
+                }
+                return Posts
+            });
+            this.setState({
+                Posts: editPostArray,
+                modalShowing: false
+            });
 
         } catch (err) {
             console.log(err);
