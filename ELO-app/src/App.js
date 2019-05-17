@@ -9,9 +9,9 @@ import PostContainer from './PostContainer/PostContainer';
 function App() {
   return (
     <div className="App">
+      <ReactPlayer url='twitch.tv/riotgames' />
       <EloContainer />
-    <ReactPlayer url='twitch.tv/riotgames' />
-    <PostContainer/>
+      <PostContainer/>
     </div>
   );
 }

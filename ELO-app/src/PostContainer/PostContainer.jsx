@@ -24,7 +24,7 @@ class PostContainer extends Component {
     }
     getPost = async () => {
         try {
-            const response = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts', {
+            const response = await fetch('http://localhost:9000/api/v1/Posts/', {
                 
             });
             if(response.status !== 200){
@@ -37,13 +37,13 @@ class PostContainer extends Component {
             }
     }
     
-    addPost = async (Post, e) => {
+    addPost = async (Posts, e) => {
         e.preventDefault();
         console.log(Posts);
         try{
-            const createdPost = await fetch('http://localhost:9000/api/v1/Posts', {
+            const createdPost = await fetch('http://localhost:9000/api/v1/Posts/', {
                 method: 'POST',
-                Posts : JSON.stringify(Post)
+                Posts : JSON.stringify(Posts)
             });
             const parsedResponse = await createdPost.json();
             console.log(parsedResponse)
@@ -55,7 +55,7 @@ class PostContainer extends Component {
     closeAndEdit = async (e) => {
         e.preventDefault();
         try{
-            const editResponse = await fetch('http://localhost:9000/api/v1/Posts', {
+            const editResponse = await fetch('http://localhost:9000/api/v1/Posts/', {
                 method: 'PUT',
                 bio: JSON.stringify(this.state.postToEdit),
                 'Content-Type': 'application'
@@ -95,12 +95,12 @@ class PostContainer extends Component {
         console.log(id, '<-- ID')
         e.preventDefault();
         try{
-            const deletePost = await fetch('http://localhost:9000/api/v1/Posts' + id, {
+            const deletePost = await fetch('http://localhost:9000/api/v1/Posts/' + id, {
                 method: 'DELETE'
             });
             console.log('inside try')
             const deletePostJson = await deletePost.json();
-            this.setState({movies: this.state.Posts.filter((movie, i) => Posts._id !== id)});
+            this.setState({Posts: this.state.Posts.filter((Posts, i) => Posts._id !== id)});
             
         } catch (err) {
             console.log(err, ' error')
