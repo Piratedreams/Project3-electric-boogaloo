@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import ReactPlayer from 'react-player'
 import EloContainer from './EloContainer/EloContainer';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import PostContainer from './PostContainer/PostContainer';
 
 
 
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <EloContainer />
     <ReactPlayer url='twitch.tv/riotgames' />
-    
+    <PostContainer/>
     </div>
   );
 }

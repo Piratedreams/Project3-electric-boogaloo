@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/stream', {
+mongoose.connect('mongodb://localhost/Posts', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false

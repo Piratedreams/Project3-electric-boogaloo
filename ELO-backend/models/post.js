@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 
 
-const userSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
     username: String,
     body: String,
     date: Date
 });
 
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Post', postSchema);
 
 

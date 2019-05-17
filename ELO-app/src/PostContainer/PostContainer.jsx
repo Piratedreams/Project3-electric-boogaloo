@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import CreatePost from '../CreatePost';
-import Posts from '../PostList';
-import EditPost from '../EditPost'
+import CreatePost from '../CreatePost/CreatePost';
+import Posts from '../PostList/PostList';
+import EditPost from '../EditPost/EditPost'
 
 class PostContainer extends Component {
     constructor(){
         super();
         this.state = {
-            Postname: '',
-            password: '',
-            _id: null
+            Posts: [],
+            postToEdit: {
+                _id: null,
+                title: '',
+                body: '',
+                date: null
+            },
+            modalShowing: false
+            
         }
     }
 
@@ -18,27 +24,27 @@ class PostContainer extends Component {
     }
     getPost = async () => {
         try {
-            const response = await fetch('https://localhost:9000/api/v1/post', {
+            const response = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts', {
                 credentials: 'include'
             });
             if(response.status !== 200){
                 throw Error(response.statusText);
             }
             const PostParsed = await response.json();
-            this.setState({Post: PostParsed.data});
+            this.setState({Posts: PostParsed.data});
             } catch (err) {
-            res.send(err)
+            console.log(err)
             }
     }
     
-    addPost = async (Post, e) => {
+    addPost = async (Posts, e) => {
         e.preventDefault();
-        console.log(Post);
+        console.log(Posts);
         try{
-            const createdMovie = await fetch('localhost:9000/api/v1/posts', {
+            const createdPost = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts', {
                 method: 'POST',
                 credentials: 'include',
-                body: JSON.stringify(Post)
+                body: JSON.stringify(Posts)
             });
         } catch (err){
         console.log(err)
@@ -47,8 +53,9 @@ class PostContainer extends Component {
     closeAndEdit = async (e) => {
         e.preventDefault();
         try{
-            const editResponse = await fetch('http://localhost:900/api/v1/posts', {
+            const editResponse = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts', {
                 method: 'PUT',
+                credentials: 'include',
                 bio: JSON.stringify(this.state.postToEdit),
                 'Content-Type': 'application'
             })
@@ -65,23 +72,24 @@ class PostContainer extends Component {
             }
         })
     }
-    showModal = (post) => {
-        Console.log(post, '<--in modal')
+    showModal = (Posts) => {
+        console.log(Posts, '<--in modal')
         this.setState({
             modalShowing: true,
-            postToEdit: post
+            postToEdit: Posts
         });
     }
     deletePost = async (id, e) => {
         console.log(id, '<-- ID')
         e.preventDefault();
         try{
-            const deletePost = await fetch('http://localhost:9000/api/v1/posts' + id, {
-                method: 'DELETE'
+            const deletePost = await fetch('https://cors-anywhere.herokuapp.com/http://localhost:9000/api/v1/Posts' + id, {
+                method: 'DELETE',
+                credentials: 'include'
             });
             console.log('inside try')
             const deletePostJson = await deletePost.json();
-            this.setState({movies: this.state.post.filter((movie, i) => post._id !== id)});
+            this.setState({movies: this.state.Posts.filter((movie, i) => Posts._id !== id)});
             
         } catch (err) {
             console.log(err, ' error')
@@ -92,8 +100,8 @@ class PostContainer extends Component {
         return (
             <div>
                 <CreatePost addPost={this.addPost}/>
-                <Post posts={this.state.Posts} showModal={this.showModal} deletePost={this.deletePost}/>
-                {this.state.modalShowing ? <EditPost postToEdit={this.state.postToEdit} closeAndEdit={this.closeAndEdit} handleFormChange={this.handleFormChange}/> : null}
+                <Posts posts={this.state.Posts} showModal={this.showModal} deletePost={this.deletePost}/>
+                {this.state.modalShowing ? <EditPost postToEdit={this.state.PostToEdit} closeAndEdit={this.closeAndEdit} handleFormChange={this.handleFormChange}/> : null}
             </div>
         )
     }
