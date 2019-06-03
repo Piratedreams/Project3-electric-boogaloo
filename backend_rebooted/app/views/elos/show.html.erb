@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rank:</strong>
+  <%= @elo.rank %>
+</p>
+
+<p>
+  <strong>Division:</strong>
+  <%= @elo.division %>
+</p>
+
+<%= link_to 'Edit', edit_elo_path(@elo) %> |
+<%= link_to 'Back', elos_path %>

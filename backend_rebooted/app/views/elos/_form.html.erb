@@ -1,0 +1,27 @@
+<%= form_with(model: elo, local: true) do |form| %>
+  <% if elo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(elo.errors.count, "error") %> prohibited this elo from being saved:</h2>
+
+      <ul>
+      <% elo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :rank %>
+    <%= form.text_field :rank %>
+  </div>
+
+  <div class="field">
+    <%= form.label :division %>
+    <%= form.text_field :division %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

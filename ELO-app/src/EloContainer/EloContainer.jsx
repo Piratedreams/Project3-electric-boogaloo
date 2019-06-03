@@ -21,12 +21,9 @@ class EloContainer extends Component {
         .then((data) => {
             console.log(data);
             this.getSummoner(data.id);
-            this.setState({
-                summonerID: data.id
-            });
         });
-        
     }
+
     getSummoner = async (summonerID) => {
         console.log(summonerID);
         const searchURL = await `https://cors-anywhere.herokuapp.com/https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerID}?api_key=RGAPI-8e62ff29-d636-45c8-80a5-ab4149b7e68a`
