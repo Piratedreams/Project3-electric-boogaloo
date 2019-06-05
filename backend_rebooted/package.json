@@ -1,5 +1,7 @@
 {
   "name": "backend_rebooted",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "passport-twitchtv": "^0.1.4"
+  }
 }

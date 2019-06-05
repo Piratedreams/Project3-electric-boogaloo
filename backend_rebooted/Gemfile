@@ -63,5 +63,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'pry'
 
-gem 'dotenv-rails'
-gem 'faraday'
+gem 'httparty'
+gem 'crack'
+
+gem 'react-rails'
+gem 'react_on_rails'
+gem 'webpacker'
