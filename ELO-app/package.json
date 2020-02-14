@@ -11,7 +11,7 @@
     "react-scripts": "3.0.1",
     "react-twitch-embed-video": "^1.0.1",
     "window-or-global": "^1.0.1",
-    "yarn": "^1.16.0"
+    "yarn": "^1.22.0"
   },
   "scripts": {
     "start": "react-scripts start",
